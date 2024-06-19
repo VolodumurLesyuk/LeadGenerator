@@ -30,6 +30,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_URL = 'user/login/'  # Шлях до сторінки авторизації
+LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_URL = '/logout/'  # Шлях до сторінки авторизації
+LOGOUT_REDIRECT_URL = '/'
 
 # Application definition
 
@@ -40,6 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'customer',
+    'lead',
 ]
 
 MIDDLEWARE = [

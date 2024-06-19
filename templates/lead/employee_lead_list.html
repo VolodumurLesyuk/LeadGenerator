@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Employee Leads List</h2>
+<ul>
+    {% for lead in leads %}
+    <li>{{ lead.name }} - <a href="{% url 'update_employee_lead' lead.uuid %}">Edit</a> | <a href="{% url 'delete_employee_lead' lead.uuid %}">Delete</a></li>
+    {% endfor %}
+</ul>
+<a href="{% url 'create_employee_lead' %}">Create New Lead</a>
+<a href="{% url 'home' %}">Головна</a>
+{% endblock %}

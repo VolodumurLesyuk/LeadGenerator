@@ -1,0 +1,21 @@
+{% load static %}
+
+<html lang='en'>
+<head>
+    <title>Aee</title>
+</head>
+<body>
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Вийти</button>
+    </form>
+
+    {% block content %}
+    <h1>Вкажіть кого ви хочете порекомендувати</h1>
+    <a href="{% url 'worker_lead_list' %}">Працівника</a>
+    <a href="{% url 'employee_lead_list' %}">Роботодавця</a>
+
+    {% endblock content %}
+</body>
+
+</html>

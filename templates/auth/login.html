@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <h2>Введіть свої дані</h2>
+    
+    <form id="form_email" method="post" >
+        {% csrf_token %}
+        <label>Емейл</label>
+        {{ form.email }}
+        {{ form.email.errors }}
+        <button type="submit">Продовжити</button>
+    </form>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+
+{% endblock content %}
