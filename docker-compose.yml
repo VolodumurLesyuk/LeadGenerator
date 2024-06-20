@@ -1,0 +1,47 @@
+version: '3'
+services:
+  postgres:
+    container_name: db_web_form_container
+    image: postgres:15.6
+    environment:
+      POSTGRES_DB: konch1
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    restart: always
+    volumes:
+      - ./test_init.sql:/docker-entrypoint-initdb.d/init.sql
+      - web_form_db:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:5434:5432"
+    networks:
+      - my_network
+
+
+  website:
+    image: web:source_site_0_07
+    container_name: website
+    restart: always
+    volumes:
+      - website_data:/app
+    ports:
+      - "127.0.0.1:8000:8000"
+    networks:
+      - my_network
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_HOST: db_web_form_container
+      DATABASE_PORT: 5432
+      DATABASE_NAME: konch1
+      DATABASE_USER: admin
+      DATABASE_PASSWORD: admin
+
+
+networks:
+  my_network:
+    driver: bridge
+
+
+volumes:
+  web_form_db:
+  website_data:
