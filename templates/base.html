@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 
 <html lang='en'>
 <head>
@@ -9,6 +10,65 @@
         {% csrf_token %}
         <button type="submit">Вийти</button>
     </form>
+
+    <li class="header__menu-list-item header__menu-list-item--language">
+        <div class="header__dropdown">
+            {% get_current_language as current_language %}
+
+            <button id="header__dropdown-btn" class="header__dropdown-btn">
+
+                {% if current_language == 'uk' %}
+                    Українська
+                {% elif current_language == 'en' %}
+                    English
+                {% endif %}
+            </button>
+            <ul class="header__dropdown-menu">
+                <li class="header__dropdown-menu-item">
+                    <a href="{% url 'switch_language' 'uk' %}">
+                        <span class="header__dropdown-menu-flag"></span>
+
+                        <span>Українська</span>
+                    </a>
+                </li>
+
+                <li class="header__dropdown-menu-item">
+                    <a href="{% url 'switch_language' 'en' %}">
+                        <span class="header__dropdown-menu-flag"></span>
+
+                        <span>English</span>
+                    </a>
+                </li>
+
+                <li class="header__dropdown-menu-item">
+                    <a href="{% url 'switch_language' 'ru' %}">
+                        <span class="header__dropdown-menu-flag"></span>
+
+                        <span>Русский</span>
+                    </a>
+                </li>
+
+                <li class="header__dropdown-menu-item">
+                    <a href="{% url 'switch_language' 'ge' %}">
+                        <span class="header__dropdown-menu-flag"></span>
+
+                        <span>Deutsch</span>
+                    </a>
+                </li>
+
+                <li  class="header__dropdown-menu-item">
+                    <a href="{% url 'switch_language' 'pl' %}">
+                        <span class="header__dropdown-menu-flag"></span>
+                        <span>Polski</span>
+                    </a>
+                </li>
+            </ul>
+
+            <ul id="header__dropdown-menu" class="header__dropdown-menu--shadow"></ul>
+
+            <div id="header__dropdown-square" class="header__dropdown-square"></div>
+        </div>
+    </li>
 
     {% block content %}
     <h1>Вкажіть кого ви хочете порекомендувати</h1>

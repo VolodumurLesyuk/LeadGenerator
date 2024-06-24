@@ -1,15 +1,16 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
-    <h2>Введіть свої дані</h2>
+    <h2>{% trans "Введіть свої дані" %}</h2>
     
     <form id="form_email" method="post" >
         {% csrf_token %}
-        <label>Емейл</label>
+        <label>{% trans "Емейл" %}</label>
         {{ form.email }}
         {{ form.email.errors }}
-        <button type="submit">Продовжити</button>
+        <button type="submit">{% trans "Продовжити" %}</button>
     </form>
     {% if error %}
         <p>{{ error }}</p>

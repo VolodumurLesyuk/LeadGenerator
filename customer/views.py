@@ -12,6 +12,10 @@ from faker import Faker
 fake = Faker()
 
 
+def switch_language(request, language):
+    request.session['django_language'] = language
+    return redirect(request.META.get('HTTP_REFERER', 'home'))
+
 @never_cache
 def check_credentials(request):
     if request.method == 'POST':
@@ -43,6 +47,7 @@ def check_credentials(request):
                         print("Error creating user", e)
                 else:
                     print("Редірект на сайт реєстрації СРМ")
+                    return redirect('new_user')
         else:
             print("Form is not valid", form.errors)
     else:
@@ -56,3 +61,5 @@ def home(request):
     return render(request, 'base.html')
 
 
+def new_user(request):
+    return render(request, 'notify/new_user.html')

@@ -1,6 +1,5 @@
 from django.urls import path
-from .views import (create_worker_lead, update_worker_lead, delete_worker_lead, list_worker_leads,
-                    create_employee_lead, update_employee_lead, delete_employee_lead, list_employee_leads)
+from .views import *
 
 urlpatterns = [
     path('worker_leads/', list_worker_leads, name='worker_lead_list'),
@@ -12,4 +11,7 @@ urlpatterns = [
     path('employee_leads/create/', create_employee_lead, name='create_employee_lead'),
     path('employee_leads/<uuid:uuid>/update/', update_employee_lead, name='update_employee_lead'),
     path('employee_leads/<uuid:uuid>/delete/', delete_employee_lead, name='delete_employee_lead'),
+
+    path('send_employee/', send_employee_leads_to_crm, name='send_employee_leads_to_crm'),
+    path('send_worker/', send_worker_leads_to_crm, name='send_worker_leads_to_crm'),
 ]

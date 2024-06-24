@@ -6,6 +6,12 @@
     <li>{{ lead.name }} - <a href="{% url 'update_employee_lead' lead.uuid %}">Edit</a> | <a href="{% url 'delete_employee_lead' lead.uuid %}">Delete</a></li>
     {% endfor %}
 </ul>
-<a href="{% url 'create_employee_lead' %}">Create New Lead</a>
-<a href="{% url 'home' %}">Головна</a>
+<a href="{% url 'create_employee_lead' %}">Create New Lead</a><br>
+<a href="{% url 'home' %}">Головна</a><br>
+
+<form action="{% url 'send_employee_leads_to_crm' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Надіслати</button>
+</form>
+
 {% endblock %}

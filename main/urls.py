@@ -18,9 +18,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 
-from customer.views import home
+from customer.views import *
 
 urlpatterns = [
+    path('switch_language/<str:language>/', switch_language, name='switch_language'),
+
     path('admin/', admin.site.urls),
     path('user/', include('customer.urls')),
     path('lead/', include('lead.urls')),

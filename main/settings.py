@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 from decouple import config
+from django.utils.translation import gettext_lazy as _
 
 import os
 
@@ -30,7 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-LOGIN_URL = 'user/login/'  # Шлях до сторінки авторизації
+LOGIN_URL = '/user/login/'  # Шлях до сторінки авторизації
 LOGIN_REDIRECT_URL = '/'
 
 LOGOUT_URL = '/logout/'  # Шлях до сторінки авторизації
@@ -53,11 +54,16 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+
+    'main.django_last_activity.middleware.SessionLanguageMiddleware',
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'main.django_last_activity.middleware.auto_logout',
 ]
 
 ROOT_URLCONF = 'main.urls'
@@ -115,11 +121,21 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LANGUAGES = [
+    ('uk', _('Ukrainian')),
+    ('en', _('English')),
+    # Додайте інші мови за потребою
+]
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),  # Замініть 'myapp' на реальне ім'я вашого додатку
+]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'UTC'
 
@@ -140,3 +156,12 @@ STATIC_ROOT = (BASE_DIR / 'staticfiles')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+from datetime import timedelta
+
+AUTO_LOGOUT = {
+    'IDLE_TIME': timedelta(minutes=20),
+    'SESSION_TIME': timedelta(minutes=40),
+    'MESSAGE': _('The session has expired. Please login again to continue.'),
+    'REDIRECT_TO_LOGIN_IMMEDIATELY': True,
+}
