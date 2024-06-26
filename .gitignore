@@ -11,3 +11,5 @@ documents_prog/tex_ex.md
 
 donatelo/cookies/*
 donatelo/temp_jsons/*
+!donatelo/cookies/
+!donatelo/temp_jsons/
