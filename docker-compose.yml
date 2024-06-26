@@ -18,7 +18,7 @@ services:
 
 
   website:
-    image: web:source_site_0_07
+    image: web:source_site_0_08
     container_name: website
     restart: always
     volumes:

@@ -12,6 +12,7 @@ done
 echo "PostgreSQL started"
 
 # Виконуємо міграції
+python manage.py makemigrations
 python manage.py migrate
 echo "Creating superuser..."
 

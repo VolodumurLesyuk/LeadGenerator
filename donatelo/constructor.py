@@ -1,8 +1,10 @@
+from decouple import config as decouple_config
+from donatelo import configs
+
 import json
 import requests
 import configparser
-from decouple import config as decouple_config
-from donatelo import configs
+
 
 config = configparser.ConfigParser()
 
