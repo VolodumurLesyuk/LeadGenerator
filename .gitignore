@@ -13,3 +13,5 @@ donatelo/cookies/*
 donatelo/temp_jsons/*
 !donatelo/cookies/
 !donatelo/temp_jsons/
+!donatelo/cookies/.gitkeep
+!donatelo/temp_jsons/.gitkeep
